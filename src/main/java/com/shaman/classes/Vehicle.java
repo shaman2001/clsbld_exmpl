@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 //enum VehicleTypes {ABSTR, CAR, SUV, TRUCK, BUS}
 
 
-public  class Vehicle {
+public class Vehicle {
     private  String mark;
     private  String model;
     private String owner; //Name Surname
@@ -17,6 +17,10 @@ public  class Vehicle {
     private  int y_of_issue;
     private  String number;
     private  String vin;
+
+    private boolean isEngineStarted;
+
+
 //    private final VehicleTypes vtype;
 //constructors ----------------------------------------------------------------
     public Vehicle() {
@@ -27,6 +31,7 @@ public  class Vehicle {
         this.y_of_issue = 0;
         this.number = null;
         this.vin = null;
+        this.isEngineStarted = false;
     }
 
     public Vehicle(String p_mark, String p_model, String owner, float p_weight,
@@ -38,6 +43,7 @@ public  class Vehicle {
         this.y_of_issue = p_yofissue;
         this.number = p_number;
         this.vin = p_vin;
+        this.isEngineStarted = false;
     }
 
     public Vehicle(Builder builder) {
@@ -48,6 +54,7 @@ public  class Vehicle {
         this.y_of_issue = builder.y_of_issue;
         this.number = builder.number;
         this.vin = builder.vin;
+        this.isEngineStarted = false;
     }
 
     public enum ColorNames {
@@ -60,63 +67,50 @@ public  class Vehicle {
         return mark;
     }
 
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
     public String getModel() {
         return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
     public Float getWeight() {
         return weight;
-    }
-
-    public void setWeight(Float weight) {
-        this.weight = weight;
     }
 
     public int getY_of_issue() {
         return y_of_issue;
     }
 
-    public void setY_of_issue(int y_of_issue) throws Exception {
-        Calendar cal = new GregorianCalendar();
-        if (y_of_issue<1890 && y_of_issue>cal.get(cal.YEAR)) {
-            this.y_of_issue = y_of_issue;
-        } else {
-            throw new Exception("Invalid year of issue");
-        }
-    }
-
     public String getNumber() {
         return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public String getVin() {
         return vin;
     }
 
-    public void setVin(String vin) {
-        this.vin = vin;
+    public void startEngine() {
+        if (!isEngineStarted) {
+            this.isEngineStarted = true;
+            System.out.println("Engine started");
+        } else {
+            System.out.println("Engine already running");
+        }
+
     }
 
+    public void stopEngine() {
+        if (isEngineStarted) {
+            this.isEngineStarted = false;
+            System.out.println("Engine stopped");
+        } else {
+            System.out.println("Engine was not running");
+        }
+    }
+    //innet builder class-------------------------------------------------------
     public static class Builder {
         //required paremeters
         private String mark;
@@ -127,9 +121,6 @@ public  class Vehicle {
         private int y_of_issue = 0;
         private String number = "";
         private String vin = "";
-
-        public  Builder () {
-        }
 
         public Builder (String p_mark, String  p_model, String p_owner) {
             this.mark = p_mark;
@@ -158,7 +149,7 @@ public  class Vehicle {
 
     }
     public String toString() {
-        StringBuilder builder = new StringBuilder("Автомобиль ");
+        StringBuilder builder = new StringBuilder("Транспортное средство ");
         builder.append(this.getMark());
         builder.append(" ");
         builder.append(this.getModel());

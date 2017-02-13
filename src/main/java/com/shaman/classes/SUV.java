@@ -1,59 +1,57 @@
 package com.shaman.classes;
 
-import com.shaman.classes.Vehicle.*;
-
 /**
  * Created by shaman on 01.02.17.
  */
-public class Car extends Vehicle {
+public class SUV extends Vehicle {
     private ColorNames color;
-    private CarTypes carType;
+    private SUVTypes suvType;
 
     //constructors----------------------------------------------------
-    public Car () {
+    public SUV() {
         super ();
         this.color = null;
-        this.carType = null;
+        this.suvType = null;
     }
 
-    public Car(CarBuilder car_builder) {
-        super(car_builder);
-        this.color = car_builder.color;
-        this.carType = car_builder.carType;
+    public SUV(SUVBuilder suv_builder) {
+        super(suv_builder);
+        this.color = suv_builder.color;
+        this.suvType = suv_builder.suvType;
     }
     //getters------------------------------------------------------------------------------
     public ColorNames getColor() {
         return color;
     }
 
-    public CarTypes getCarType() {
-        return carType;
+    public SUVTypes getSUVType() {
+        return suvType;
     }
 
-    public enum CarTypes {
-        SEDAN, COUPE, HATCHBACK, MINIVAN, CABRIO, COMPACT, SPORT
+    public enum SUVTypes {
+        CROSSOVER, COMPACT, FULLSIZE, PICKUP
     }
     //inner builder class--------------------------------------------------------
-    public static class CarBuilder extends Vehicle.Builder{
+    public static class SUVBuilder extends Builder{
         private ColorNames color;
-        private CarTypes carType;
+        private SUVTypes suvType;
 
-        public CarBuilder(String p_mark, String  p_model, String p_owner) {
+        public SUVBuilder(String p_mark, String  p_model, String p_owner) {
             super(p_mark, p_model, p_owner);
         }
 
-        public CarBuilder setColor(ColorNames val) {
+        public SUVBuilder setColor(ColorNames val) {
             this.color = val;
             return this;
         }
 
-        public CarBuilder setCarType(CarTypes val) {
-            this.carType = val;
+        public SUVBuilder setSUVType(SUVTypes val) {
+            this.suvType = val;
             return this;
         }
         @Override
-        public Car build() {
-            return new Car(this);
+        public SUV build() {
+            return new SUV(this);
         }
     }
     public String toString() {
@@ -62,7 +60,7 @@ public class Car extends Vehicle {
         builder.append(", цвет - ");
         builder.append(this.getColor());
         builder.append(", тип - ");
-        builder.append(this.getCarType());
+        builder.append(this.getSUVType());
         return builder.toString();
     }
 }
